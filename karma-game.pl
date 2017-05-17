@@ -16,6 +16,7 @@ play(y) :- play.
 play :-	write('Oh... One old lady trying to cross the street, you have 1 min to get your bus. Will help her?'), nl,
 	write('1 Yes, it is the right thing to do!'), nl,
 	write('2 No, I am in a hurry... Do not have a time to waste'), nl,
+	write('3 Hear your thoughts'), nl,
 	write('Choose an alternative'), nl,
 	read(Choice),
 	part1(Choice).
@@ -23,16 +24,24 @@ play :-	write('Oh... One old lady trying to cross the street, you have 1 min to 
 part1(1) :- write('OMG, You lost your bus! Now you can...'), nl,
 	   write('1 Wait another blessed by god transport'), nl,
  	   write('2 Go on foot. With much swearing...'), nl,
+	   write('3 Hear your thoughts'), nl,
 	   write('Choose an alternative'), nl,
 	   read(Choice),
 	   part3(Choice).
 
-part1(2) :- write('You get the bus, nice travel! But you are hungy, eat or not?'), nl,
+part1(2) :- write('You get on the bus, nice travel! But you are hungry, eat or not?'), nl,
 	   write('1 Yes, go make a honest coofee. But you will lose some of the lesson.'), nl,
 	   write('2 No, go fast to classrom. To be one good student, sacrifices is needed.'), nl,
+	   write('3 Hear your thoughts'), nl,
 	   write('Choose an alternative'), nl,
 	   read(Choice),
 	   part2(Choice).
+
+part1(3) :- write('Angel: Angel thoughts for rule play'), nl,
+		write('Devil: Devil thoughts for rule play'), nl,
+		write('Press any button to continue...'), nl,
+		read(Choice),
+		play(y).
 
 part2(1) :- write('In Obelixo you ask by coofee with cheese bread.'), nl,
 			write('The bread was much milk, you are allergic and was needed back to the house, was an bad morning.'), nl,
@@ -47,13 +56,11 @@ part2(2) :- write('Professor was raged! Before start lesson some call makes he s
 	    read(GameOver),
 	    play(GameOver).
 
-part3(1) :- write('Few minutes pass.. One friend offered a ride! Coincidentally was a friend selling cereal bars.'), nl,
-			write('You evidently buy some bars, you are angry!'), nl,
-			write('When you entry in classrom, your professor is talking with your grandma. He is Happy!'), nl,
-			write('Happiness is contagious, your morning is very good!'), nl,
-			write('Would you like to play again y/n?'), nl,
-			read(GameOver),
-			play(GameOver).
+part2(3) :- write('Angel: Angel thoughts for rule part1(2)'), nl,
+		write('Devil: Devil thoughts for rule part1(2)'), nl,
+		write('Press any button to continue...'), nl,
+		read(Choice),
+		play(y).
 
 part3(1) :- write('Few minutes pass.. One friend offered a ride! Coincidentally was a friend selling cereal bars.'), nl,
 			write('You evidently buy some bars, you are angry!'), nl,
@@ -63,7 +70,7 @@ part3(1) :- write('Few minutes pass.. One friend offered a ride! Coincidentally 
 			read(GameOver),
 			play(GameOver).
 
-part3(1) :- write('Walking in the morning you see the beautiful trees, think about life and discover one new bakery.'), nl,
+part3(2) :- write('Walking in the morning you see the beautiful trees, think about life and discover one new bakery.'), nl,
 			write('Inevitable that you go eat something lightly...'), nl,
 			write('Owww! Getting out, you found your professor with your grandma, the old lady that you had saved!'), nl,
 			write('Everybody laughs, everybody happy, he proposed to lift you to college.'), nl,
@@ -71,3 +78,9 @@ part3(1) :- write('Walking in the morning you see the beautiful trees, think abo
 			write('Would you like to play again y/n?'), nl,
 			read(GameOver),
 			play(GameOver).
+
+part3(3) :- write('Angel: Angel thoughts for rule part1(1)'), nl,
+		write('Devil: Devil thoughts for rule part1(1)'), nl,
+		write('Press any button to continue...'), nl,
+		read(Choice),
+		play(y).
