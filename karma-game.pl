@@ -8,7 +8,7 @@ character(devil).
 character(angel).
 
 % Init game
-play(n) :- write('What a beatiful day, like any student you are going to your class!'), nl, !.
+play(n) :- write('Goodbye!'), nl, !.
 
 % To restart game
 play(y) :- play.
@@ -86,5 +86,9 @@ part3(3) :- write('Angel: Walking is good for your health, why don\' we walk?'),
 		part1(1).
 
 
-	%cardapio
-		cardapio(segunda,[espaguete,suco,gelatina]).
+	%cardapioBakery
+		cardapio(mon,['baguete','orange juice']).
+		cardapio(tue,['croassaint','hot chocolat']).
+		cardapio(wen,['brioche','coffe']).
+		cardapio(thu,['cheese bread', 'pingado']).
+		cardapio(fri,['pizza bread', 'ice tea']).
