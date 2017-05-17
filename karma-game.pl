@@ -7,30 +7,41 @@
 character(devil).
 character(angel).
 
-% Days of the week
-today(mon, tue, wed, thu, sex).
-
 % Init game
-play :- play(mon).
+play :- Today = mon,
+play(Today).
 
 % End game
-play(n) :- write('Goodbye!'), nl, !.
+play(n, Today) :- write(Today), nl, write('Goodbye!'), nl, !.
 
 % To continue the game
-play(y) :- play.
-%play(y) :- play(nextDay(today)).
+play(y, Today) :- nextDay(Today, Tomorrow, [mon, tue, wed, thu, fri]).
 
-%nextDay(X) :-
+nextDay(X, Y, [X,Y|_]) :- Tomorrow = Y,
+play(Tomorrow).
+nextDay(X, Y, [_|Tail]) :- nextDay(X, Y, Tail).
 
-play(mon) :-	write('Oh... One old lady is trying to cross the street, you have one minute to get on your bus. Will help her?'), nl,
+play(mon) :- write('Monday! Continue? y/n'), nl,
+read(Choice), nl,
+play(Choice, mon).
+
+play(tue) :- write('tuesday! Continue? y/n'), nl,
+read(Choice), nl,
+play(Choice, tue).
+
+play(wed) :- write('entrou <3').
+
+/**play(mon) :-	write('Oh... One old lady is trying to cross the street, you have one minute to get on your bus. Will help her?'), nl,
 	write('1 Yes, it is the right thing to do!'), nl,
 	write('2 No, I am in a hurry... Do not have a time to waste'), nl,
 	write('3 Hear your thoughts'), nl,
 	write('Choose an alternative'), nl,
-	read(Choice),
-	mon1(Choice).
+	write(today).
+	%read(Choice),
+	%play(y).
+	%mon1(Choice). */
 
-mon1(1) :- write('OMG, You lost your bus! Now you can...'), nl,
+mon1(1) :- write('OMG, You missed your bus! Now you can...'), nl,
 	   write('1 Wait another blessed by god transport'), nl,
  	   write('2 Go on foot. Swearing a lot...'), nl,
 	   write('3 Hear your thoughts'), nl,
@@ -56,14 +67,14 @@ mon2(1) :- write('In Obelixo you ask for a coofee with cheese bread.'), nl,
 			write('The bread had too much milk, you are allergic and needed to go back home. Damn, that was a bad morning.'), nl,
  	    write('Would you like to play again y/n?'), nl,
 	    read(GameOver),
-	    play(GameOver).
+	    play(GameOver, mon).
 
 mon2(2) :- write('The Professor got a call from someone just as the class started and got really, really mad.'), nl,
 			write('He passes one surprise task, anyone that is present does suficiently well.'), nl,
 			write('The weather is annoying, your morning could have been better...'), nl,
  	    write('Play tomorrow or stop playing y/n?'), nl,
 	    read(GameOver),
-	    play(GameOver).
+	    play(GameOver, mon).
 
 mon2(3) :- write('Angel: Angel thoughts for rule mon1(2)'), nl,
 		write('Devil: Devil thoughts for rule mon1(2)'), nl,
@@ -77,7 +88,7 @@ mon3(1) :- write('A few minutes passes.. And one friend offered a ride! Coincide
 			write('Happiness is contagious, your morning is very good!'), nl,
 			write('Would you like to play again y/n?'), nl,
 			read(GameOver),
-			play(GameOver).
+			play(GameOver, mon).
 
 mon3(2) :- write('Walking you see beautiful trees and forget you\'re angry, it makes you think about life. Suddenly you smell sothing really good, it is comming from a bakery you never seen before.'), nl,
 			write('It is inevitable that you want to go in and eat something...'), nl,
@@ -86,7 +97,7 @@ mon3(2) :- write('Walking you see beautiful trees and forget you\'re angry, it m
 			write('Happiness is contagious, your morning is very good!'), nl,
 			write('Would you like to play again y/n?'), nl,
 			read(GameOver),
-			play(GameOver).
+			play(GameOver, mon).
 
 mon3(3) :- write('Angel: Walking is good for your health, why don\' we walk?'), nl,
 		write('Devil: Walk? Are you insane? I rather wait here and hope no other buss comes'), nl,
