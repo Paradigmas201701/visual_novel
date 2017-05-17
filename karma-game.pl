@@ -7,6 +7,7 @@
 character(devil).
 character(angel).
 
+% Days of the week
 day(mon).
 day(tue).
 day(wed).
@@ -18,9 +19,9 @@ play :- Today = mon,
 play(Today).
 
 % End game
-play(n, Today) :- write(Today), nl, write('Goodbye!'), nl, !.
+play(n, Today) :- write('Goodbye!'), nl, !.
 
-% To continue the game
+% Continue game
 play(y, Today) :-
 	days(D),
 	nextDay(Today, Tomorrow, D).
@@ -28,14 +29,24 @@ play(y, Today) :-
 days(D) :- findall(X, day(X), D).
 
 nextDay(X, Y, [X,Y|_]) :- Tomorrow = Y,
-play(Tomorrow).
+	play(Tomorrow).
 nextDay(X, Y, [_|Tail]) :- nextDay(X, Y, Tail).
+nextDay(X, _, [X]) :- write('What?! No, stop! That\'s enough! It was a long week.. Enjoy your weekend!'), nl,
+	play(n, fri).
 
 play(tue) :- write('tuesday! Continue? y/n'), nl,
 read(Choice), nl,
 play(Choice, tue).
 
-play(wed) :- write('entrou <3').
+play(wed) :- write('Wednesday! <Necessario implementar a historia de quarta> Continue? y/n'), nl,
+read(Choice), nl,
+play(Choice, wed).
+play(thu) :- write('Thursday! <Necessario implementar a historia de quinta> Continue? y/n'), nl,
+read(Choice), nl,
+play(Choice, thu).
+play(fri) :- write('Friday! <Necessario implementar a historia de sexta> Continue? y/n'), nl,
+read(Choice), nl,
+play(Choice, fri).
 
 clear :- write('\e[2J').
 
@@ -89,8 +100,8 @@ mon2(2) :- clear,
   play(GameOver, mon).
 
 mon2(3) :- clear,
-	write('Angel: Angel thoughts for rule mon1(2)'), nl,
-	write('Devil: Devil thoughts for rule mon1(2)'), nl,
+	write('Angel: Hey hey, stop right there! You know you should be in class already!'), nl,
+	write('Devil: Are you kidding me? We are STARVING! I could even eat that stupid angelic face of yours. Hey bro, feed us!'), nl,
 	write('Press any button to continue...'), nl,
 	read(Choice),
 	mon1(2).
@@ -105,26 +116,55 @@ mon3(1) :- clear,
 	play(GameOver, mon).
 
 mon3(2) :- clear,
-	write('Walking you see beautiful trees and forget you\'re angry, it makes you think about life. Suddenly you smell sothing really good, it is comming from a bakery you never seen before.'), nl,
-	write('It is inevitable that you want to go in and eat something...'), nl,
-	write('Owww! Getting out, you found your professor with his grandma, the old lady that you helped!'), nl,
-	write('She points at you and tells you professor you were the nice kid who helped her. He thanks you and offers a ride to college. He likes you better now and the old lady is happy'), nl,
-	write('Happiness is contagious, your morning is very good!'), nl,
-	write('Would you like to play again y/n?'), nl,
-	read(GameOver),
-	play(GameOver, mon).
+  write('Walking you see beautiful trees and forget you\'re angry, it makes you think about life. Suddenly you smell something really good, it is comming from a bakery you never seen before.'), nl,
+  write('It is inevitable that you want to go in and eat something...'), nl,
+  write('1 Go in!'), nl,
+  write('2 Keep walking'), nl,
+  write('3 Check Menu'), nl,
+  read(Choice),
+	mon4(Choice).
 
 mon3(3) :- clear,
-	write('Angel: Walking is good for your health, why don\' we walk?'), nl,
+	write('Angel: Walking is good for your health, why don\'t we walk?'), nl,
 	write('Devil: Walk? Are you insane? I rather wait here and hope no other buss comes'), nl,
 	write('Press any button to continue...'), nl,
 	read(Choice),
 	mon1(1).
 
+mon4(1) :- clear,
+write('Owww! Inside you meet with your teacher and the old lady!'), nl,
+write('She points at you and tells your teacher you were the nice kid who helped her. He thanks you for helping HIS grandma and offers you a ride to college. He likes you better now and the old lady is happy'), nl,
+write('Happiness is contagious, had an amazing day!'), nl,
+write('Continue to tomorrow y/n?'), nl,
+read(GameOver),
+play(GameOver, mon).
 
-	%cardapioBakery
-		menuBakery(mon,['baguete','orange juice']).
-		menuBakery(tue,['croassaint','hot chocolat']).
-		menuBakery(wen,['brioche','coffe']).
-		menuBakery(thu,['cheese bread', 'pingado']).
-		menuBakery(fri,['pizza bread', 'ice tea']).
+mon4(2)	clear,
+	write('Just a few more minutes of walk and your professor passes by you on his car with his grandma, the old lady that you helped!'), nl,
+	write('She points at you and tells your professor you were the nice kid who helped her. He stops the car, thanks you and offers a you ride to college and to pay you breakfast. He likes you better now and the old lady is happy'), nl,
+	write('Happiness is contagious, had an amazing day!'), nl,
+	write('Continue to tomorrow y/n?'), nl,
+	read(GameOver),
+	play(GameOver, mon).
+
+mon4(3) :-	clear,
+		menuOfTheDay(mon, M),
+		writeMenu(M), nl,
+		write('Press any button to continue...'), nl,
+		read(Choice),
+		mon3(2).
+
+
+%cardapioBakery
+menuBakery(mon,['baguete','orange juice']).
+menuBakery(tue,['croassaint','hot chocolat']).
+menuBakery(wen,['brioche','coffe']).
+menuBakery(thu,['cheese bread', 'pingado']).
+menuBakery(fri,['pizza bread', 'ice tea']).
+
+menuOfTheDay(Today, M) :-
+	menuBakery(Today, M).
+
+writeMenu([M]) :- write(M), write('.').
+writeMenu([M|Tail]) :- write(M), write(', '),
+	writeMenu(Tail).
