@@ -1,4 +1,4 @@
-% Code of game karma
+% Code of karma game
 % Into terminal type: swipl -s karma-game.pl
 % Into swipl console type: play .
 % Enjoy it!!!
@@ -6,28 +6,33 @@
 % Turn singleton warnings
 :- style_check(-singleton).
 
-% Define the chars of game
-character(devil).
-character(angel).
+:- [days].
 
-% Days of the week
-day(mon).
-day(tue).
-day(wed).
-day(thu).
-day(fri).
+:- [cardapioBakery].
 
-%cardapioBakery
-menuBakery(mon,['baguete','orange juice']).
-menuBakery(tue,['croassaint','hot chocolat']).
-menuBakery(wen,['brioche','coffe']).
-menuBakery(thu,['cheese bread', 'pingado']).
-menuBakery(fri,['pizza bread', 'ice tea']).
+% Define tomorrow like after head(today)
+nextDay(X, Y, [X,Y|_]) :- Tomorrow = Y,
+	play(Tomorrow).
+
+nextDay(X, Y, [_|Tail]) :- nextDay(X, Y, Tail).
+
+nextDay(X, _, [X]) :- write('What?! No, stop! That\'s enough! It was a long week.. Enjoy your weekend!'), nl,
+	play(n, fri).
+
+% Menu changes according of day
+menuOfTheDay(Today, M) :-
+	menuBakery(Today, M).
+
+writeMenu([M]) :- write(M), write('.').
+writeMenu([M|Tail]) :- write(M), write(', '),
+	writeMenu(Tail).
 
 % Init game
 play :- play(mon).
+
 % End game
-play(n) :- write('Goodbye!'), nl.
+play(n, Today) :- write('Goodbye!'), nl.
+
 % Continue game
 play(y, Today) :-
 	day(Tomorrow),
@@ -35,19 +40,6 @@ play(y, Today) :-
 	nextDay(Today, Tomorrow, D).
 
 days(D) :- findall(X, day(X), D).
-
-nextDay(X, Y, [X,Y|_]) :- Tomorrow = Y,
-	play(Tomorrow).
-nextDay(X, Y, [_|Tail]) :- nextDay(X, Y, Tail).
-nextDay(X, _, [X]) :- write('What?! No, stop! That\'s enough! It was a long week.. Enjoy your weekend!'), nl,
-	play(n, fri).
-
-menuOfTheDay(Today, M) :-
-	menuBakery(Today, M).
-
-writeMenu([M]) :- write(M), write('.').
-writeMenu([M|Tail]) :- write(M), write(', '),
-	writeMenu(Tail).
 
 clear :- write('\e[2J').
 
