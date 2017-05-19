@@ -3,6 +3,9 @@
 % Into swipl console type: play .
 % Enjoy it!!!
 
+% Turn singleton warnings
+:- style_check(-singleton).
+
 % Define the chars of game
 character(devil).
 character(angel).
@@ -22,14 +25,12 @@ menuBakery(thu,['cheese bread', 'pingado']).
 menuBakery(fri,['pizza bread', 'ice tea']).
 
 % Init game
-play :- Today = mon,
-play(Today).
-
+play :- play(mon).
 % End game
-play(n, Today) :- write('Goodbye!'), nl, !.
-
+play(n) :- write('Goodbye!'), nl.
 % Continue game
 play(y, Today) :-
+	day(Tomorrow),
 	days(D),
 	nextDay(Today, Tomorrow, D).
 
@@ -50,7 +51,7 @@ writeMenu([M|Tail]) :- write(M), write(', '),
 
 clear :- write('\e[2J').
 
-
+/*
 play(wed) :- write('Wednesday! <Necessario implementar a historia de quarta> Continue? y/n'), nl,
 read(Choice), nl,
 play(Choice, wed).
@@ -60,8 +61,7 @@ play(Choice, thu).
 play(fri) :- write('Friday! <Necessario implementar a historia de sexta> Continue? y/n'), nl,
 read(Choice), nl,
 play(Choice, fri).
-
-
+*/
 
 play(mon) :-	clear,
 	write('Oh... One old lady is trying to cross the street, you have one minute to get on your bus. Will help her?'), nl,
@@ -94,7 +94,7 @@ mon1(3) :- clear,
 	write('Angel: She\'s and old lady, are you seriously not gonna help?'), nl,
 	write('Devil: Why don\'t you not help and maybe even skip class today?'), nl,
 	write('Press any button to continue...'), nl,
-	read(Choice),
+	read(AnyButton),
 	play(mon).
 
 mon2(1) :- clear,
@@ -116,7 +116,7 @@ mon2(3) :- clear,
 	write('Angel: Hey hey, stop right there! You know you should be in class already!'), nl,
 	write('Devil: Are you kidding me? We are STARVING! I could even eat that stupid angelic face of yours. Hey bro, feed us!'), nl,
 	write('Press any button to continue...'), nl,
-	read(Choice),
+	read(AnyButton),
 	mon1(2).
 
 mon3(1) :- clear,
@@ -141,7 +141,7 @@ mon3(3) :- clear,
 	write('Angel: Walking is good for your health, why don\'t we walk?'), nl,
 	write('Devil: Walk? Are you insane? I rather wait here and hope no other buss comes'), nl,
 	write('Press any button to continue...'), nl,
-	read(Choice),
+	read(AnyButton),
 	mon1(1).
 
 mon4(1) :- clear,
@@ -152,7 +152,7 @@ write('Continue to tomorrow y/n?'), nl,
 read(GameOver),
 play(GameOver, mon).
 
-mon4(2)	clear,
+mon4(2) :- clear,
 	write('Just a few more minutes of walk and your professor passes by you on his car with his grandma, the old lady that you helped!'), nl,
 	write('She points at you and tells your professor you were the nice kid who helped her. He stops the car, thanks you and offers a you ride to college and to pay you breakfast. He likes you better now and the old lady is happy'), nl,
 	write('Happiness is contagious, had an amazing day!'), nl,
@@ -164,7 +164,7 @@ mon4(3) :-	clear,
 	menuOfTheDay(mon, M),
 	writeMenu(M), nl,
 	write('Press any button to continue...'), nl,
-	read(Choice),
+	read(AnyButton),
 	mon3(2).
 
 
@@ -202,7 +202,7 @@ tue1(3) :- clear,
 	write('Angel: zzzzzzZz'), nl,
 	write('Devil: zzZZzZzzzZzSNOOOOOREzzzZZzzZZSNOOOOOOOOREEEZZzzZzzZZZZZzzzzzZ'), nl,
 	write('Press any button to continue...'), nl,
-	read(Choice),
+	read(AnyButton),
 	play(tue).
 
 
@@ -226,7 +226,7 @@ tue2(3) :- clear,
 	write('Angel: -Yawn- Good morning! We should hurry now, you don\'t want to miss your class!'), nl,
 	write('Devil: -Snoring- ZZzZZZzzzZZZZzZZzZZZzzZZzZZZzzZZZZZzzZzZzZzzzzZZzzZZZZzzzzZZZZzzz'), nl,
 	write('Press any button to continue...'), nl,
-	read(Choice),
+	read(AnyButton),
 	tue1(1).
 
 
@@ -255,7 +255,7 @@ tue3(3) :- clear,
 	write('Angel: Walking is good for your health! Let\'s go and enjoy the day!'), nl,
 	write('Devil: Why? WHY did you wake me?! What did I ever do to you?! If you make me walk now I\'ll never speak with you again'), nl,
 	write('Press any button to continue...'), nl,
-	read(Choice),
+	read(AnyButton),
 	tue1(2).
 
 
@@ -279,7 +279,7 @@ tue4(3) :- clear,
 	write('Angel: Run, run! We can still make it!'), nl,
 	write('Devil: See?! You woke me up for nothing! It is gone! Let\'go home and sleep some more'), nl,
 	write('Press any button to continue...'), nl,
-	read(Choice),
+	read(AnyButton),
 	tue2(1).
 
 
@@ -306,7 +306,7 @@ tue5(3) :- clear,
 	menuOfTheDay(tue, M),
 	writeMenu(M), nl,
 	write('Press any button to continue...'), nl,
-	read(Choice),
+	read(AnyButton),
 	tue3(1).
 
 
@@ -330,12 +330,11 @@ tue6(3) :- clear,
 	write('Angel: That seems interesting! Ask him!'), nl,
 	write('Devil: Don\'t you have a bottle of water? So we can \'accidentally\' spill some water at his book?'), nl,
 	write('Press any button to continue...'), nl,
-	read(Choice).
+	read(AnyButton).
 
 	tue6(3, 3) :- tue6(3), tue3(2).
 	tue6(3, 4) :- tue6(3), tue4(1).
 	tue6(3, 5) :- tue6(3), tue5(2).
-
 
 tue7(1) :- clear,
 	write('She hears you out, and she is a very nice person! It\'s almoust like she remembers how it is to be a student.'), nl,
@@ -357,7 +356,7 @@ tue7(3) :- clear,
 	write('Angel: You should be honest with her. What is the worst thing that can happen?'), nl,
 	write('Devil: Uuuuuh, I don\' know, maybe she WILL FAIL HIM?! LIE LIE LIE!'), nl,
 	write('Press any button to continue...'), nl,
-	read(Choice),
+	read(AnyButton),
 	tue5(1).
 
 tue8(1) :- clear,
