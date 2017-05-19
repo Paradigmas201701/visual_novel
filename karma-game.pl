@@ -47,13 +47,13 @@ clear :- write('\e[2J').
 
 :- include('tuesday.pl').
 
+:- include('wednesday.pl').
+
 /* TODO
-play(wed) :- write('Wednesday! <Necessario implementar a historia de quarta> Continue? y/n'), nl,
-read(Choice), nl,
-play(Choice, wed).
 play(thu) :- write('Thursday! <Necessario implementar a historia de quinta> Continue? y/n'), nl,
 read(Choice), nl,
 play(Choice, thu).
+
 play(fri) :- write('Friday! <Necessario implementar a historia de sexta> Continue? y/n'), nl,
 read(Choice), nl,
 play(Choice, fri).
