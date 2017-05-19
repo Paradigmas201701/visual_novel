@@ -403,6 +403,13 @@ wed1(3) :- clear,
 	.
 
 wed2(1) :- clear,
+	write('She gets really really mad at you for the way you acted, and the fight escalates to a point where you two break up. You notice it is still 10 in the morning. How do you proceed?'), nl,
+	write('1 Go home and stay at rock bottom vibes all day, listening to blink-182\'s \"I Miss You\" song.'), nl,
+	write('2 Try to catch the second class at school, sneaking in.'), nl,
+	write('3 Hear your thoughts'), nl,
+	write('Choose an alternative'), nl,
+	read(Choice),
+	wed3(Choice).
 	.
 
 wed2(2) :- clear,
@@ -413,3 +420,10 @@ wed2(2) :- clear,
 	write('Choose an alternative'), nl,
 	read(Choice),
 	wed3(Choice).
+
+wed2(3) :- clear,
+	write('Angel: Dude, go easy. Do not hurt her feelings. The girl is in love...'), nl,
+	write('Devil: CHEESY! Aw man, you don\'t need that! You are young and free! Go score some kisses on the freshman girls!'), nl,
+	write('Press any button to continue...'), nl,
+	read(Choice),
+	wed1(1).
