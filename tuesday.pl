@@ -1,3 +1,4 @@
+
 play(tue) :- 	clear,
 	write('(...) WHAT?! Gez, what\'s that noise? Wh.. Oh, it\'s your alarm. It\'s a new day today!'), nl,
 	write('1 Hit snore.'), nl,

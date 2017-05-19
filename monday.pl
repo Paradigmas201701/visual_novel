@@ -1,3 +1,4 @@
+
 play(mon) :-	clear,
 	write('Oh... One old lady is trying to cross the street, you have one minute to get on your bus. Will help her?'), nl,
 	write('1 Yes, it is the right thing to do!'), nl,

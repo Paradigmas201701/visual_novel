@@ -15,11 +15,6 @@
 nextDay(X, Y, [X,Y|_]) :- Tomorrow = Y,
 	play(Tomorrow).
 
-nextDay(X, Y, [_|Tail]) :- nextDay(X, Y, Tail).
-
-nextDay(X, _, [X]) :- write('What?! No, stop! That\'s enough! It was a long week.. Enjoy your weekend!'), nl,
-	play(n, fri).
-
 % Menu changes according of day
 menuOfTheDay(Today, M) :-
 	menuBakery(Today, M).
@@ -40,7 +35,24 @@ play(y, Today) :-
 	days(D),
 	nextDay(Today, Tomorrow, D).
 
+nextDay(X, Y, [_|Tail]) :- nextDay(X, Y, Tail).
+
+nextDay(X, _, [X]) :- write('What?! No, stop! That\'s enough! It was a long week.. Enjoy your weekend!'), nl,
+	play(n, fri).
+
 days(D) :- findall(X, day(X), D).
+
+%--------------------------So tirar se implementar :) pra nao quebrar a sequencia-------------------------------------%
+
+play(thu) :- write('Thursday! No story yet. Go to friday? y/n'), nl,
+	read(GameOver),
+	play(GameOver, thu).
+
+play(fri) :- write('Friday! No story yet. Go to saturday? y/n'), nl,
+	read(GameOver),
+	play(GameOver, fri).
+
+%---------------------------------------------------------------------------------------------------------------------%
 
 clear :- write('\e[2J').
 

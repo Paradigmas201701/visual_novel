@@ -1,3 +1,4 @@
+
 play(wed) :- clear,
 	write('It\'s early in the morning, and your girlfriend calls you. She wants to skip class with you to go on a romantic date. What do you answer her?'), nl,
 	write('1 SCORE! Let\'s go!'), nl,
