@@ -5,6 +5,7 @@
 
 % Turn singleton warnings
 :- style_check(-singleton).
+:- style_check(-discontiguous).
 
 :- [days].
 
