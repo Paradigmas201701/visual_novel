@@ -17,7 +17,7 @@ day(fri).
 %cardapioBakery
 menuBakery(mon,['baguete','orange juice']).
 menuBakery(tue,['croassaint','hot chocolat']).
-menuBakery(wen,['brioche','coffe']).
+menuBakery(wed,['brioche','coffe']).
 menuBakery(thu,['cheese bread', 'pingado']).
 menuBakery(fri,['pizza bread', 'ice tea']).
 
@@ -51,9 +51,6 @@ writeMenu([M|Tail]) :- write(M), write(', '),
 clear :- write('\e[2J').
 
 
-play(wed) :- write('Wednesday! <Necessario implementar a historia de quarta> Continue? y/n'), nl,
-read(Choice), nl,
-play(Choice, wed).
 play(thu) :- write('Thursday! <Necessario implementar a historia de quinta> Continue? y/n'), nl,
 read(Choice), nl,
 play(Choice, thu).
@@ -139,7 +136,7 @@ mon3(2) :- clear,
 
 mon3(3) :- clear,
 	write('Angel: Walking is good for your health, why don\'t we walk?'), nl,
-	write('Devil: Walk? Are you insane? I rather wait here and hope no other buss comes'), nl,
+	write('Devil: Walk? Are you insane? I\'d rather wait here and hope no other buss comes'), nl,
 	write('Press any button to continue...'), nl,
 	read(Choice),
 	mon1(1).
@@ -208,7 +205,7 @@ tue1(3) :- clear,
 
 tue2(1) :- clear,
 	write('Once you get to the stop, the bus is about to leave.'), nl,
-	write('1 Signal like a crazy person hopping the bus driver will see you and wait'), nl,
+	write('1 Signal like a crazy person hoping the bus driver will see you and wait'), nl,
 	write('2 Give up, see the bus leaving and go back home to sleep some more'), nl,
 	write('3 Hear your thoughts'), nl,
 	write('Choose an alternative'), nl,
@@ -378,3 +375,41 @@ tue8(3) :- clear,
 	write('Press any button to continue...'), nl,
 	read(Choice),
 	tue6(1, 1).
+
+		%-------------------------------------------Wednesday---------------------------------------%
+
+play(wed) :- clear,
+	write('It\'s early in the morning, and your girlfriend calls you. She wants to skip class with you to go on a romantic date. What do you answer her?'), nl,
+	write('1 SCORE! Let\'s go!'), nl,
+	write('2 Can\'t we go after class? I really should not be skipping any classes. Missed too many already...'), nl,
+	write('3 Hear your thoughts'), nl,
+	write('Choose an alternative'), nl,
+	read(Choice),
+	wed1(Choice).
+
+wed1(1) :- clear,
+	write('You two get ready and meet at the Joesley Batista park. She tells you she loves you, but you don\'t feel too ready to assume that kind of commitment. what do you do?'), nl,
+	write('1 Change subject and pretend that it did not happen.'), nl,
+	write('2 Tell her you love her back, so she won\'t be hurt, because you care for her feelings.'), nl,
+	write('3 Hear your thoughts'), nl,
+	write('Choose an alternative'), nl,
+	read(Choice),
+	wed2(Choice).
+
+wed1(2) :- clear,
+	.
+
+wed1(3) :- clear,
+	.
+
+wed2(1) :- clear,
+	.
+
+wed2(2) :- clear,
+	write('She kisses you nonstop, and asks if you wanna come over to her house...'), nl,
+	write('1 Sure baby, maybe we can catch a movie on movieFlix and grab a pizza.'), nl,
+	write('2 I am not sure... I think I should go back to school now. I have already missed too many classes.'), nl,
+	write('3 Hear your thoughts'), nl,
+	write('Choose an alternative'), nl,
+	read(Choice),
+	wed3(Choice).
